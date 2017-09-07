@@ -24,7 +24,7 @@
 		<!-- http://maven.apache.org/general.html#encoding-warning  -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<tycho-version>0.24.0</tycho-version>
+		<tycho-version>1.0.0</tycho-version>
 		<!-- These properties define a dummy certificate store that is used unless the developer passes overwrites to maven -->
 		<!-- see http://stackoverflow.com/a/3620575 for how such an overwrite would look like. -->  
 		<keystore.path>${project.basedir}/../keystore</keystore.path>
