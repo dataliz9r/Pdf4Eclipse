@@ -382,7 +382,7 @@ public class PDFPageViewer extends Canvas implements PaintListener, IPreferenceC
     	int offset = trimy1*origw;
     	int end = trimy2*origw;
     	trimx1loop:
-    		while (trimx1 != origw) {
+    		while (trimx1 < origw) {
     			for (int i=offset+trimx1; i<end; i+=origw) {
     				if (srcbuf[i] != referenceColor)
     					break trimx1loop;
@@ -394,7 +394,7 @@ public class PDFPageViewer extends Canvas implements PaintListener, IPreferenceC
     	int trimx2 = origw-1;
     	referenceColor = srcbuf[srcbuf.length-1];
     	trimx2loop:
-    		while (trimx2 != trimy1) {
+    		while (trimx2 > trimy1) {
     			for (int i=offset+trimx2; i<end; i+=origw) {
     				if (srcbuf[i] != referenceColor)
     					break trimx2loop;
@@ -410,8 +410,14 @@ public class PDFPageViewer extends Canvas implements PaintListener, IPreferenceC
     	trimy1 = Math.max(0, trimy1-margin);
     	trimy2 = Math.min(origh, trimy2+margin);
     	
+    	if (trimx1 < 0 || trimx2-trimx1 <= 0 || trimy1 < 0 || trimy2-trimy1 < 0) {
+			// Image can't be trimmed because detection above failed to find margins.
+			// Continue with original image. Otherwise will run into an NPE.
+    		return;
+    	}
+    	
     	// remember trim margins
-    	trimOffset .x = trimx1;
+    	trimOffset.x = trimx1;
     	trimOffset.y = trimy1;
     	horizontalTrimFactor = 1.0f * (trimx2-trimx1) / origw;
     	verticalTrimFactor = 1.0f * (trimy2-trimy1) / origh;
