@@ -507,7 +507,12 @@ public class PDFEditor extends EditorPart implements IResourceChangeListener,
 			@Override
 			public void controlResized(ControlEvent e) {
 				try {
+					// Unsubscribe and resubscribe listener while triggering a resize event to
+					// prevent a cyclic event loop. This caused a livelock of the TLA+ Toolbox
+					// main thread when "Specifying Systems" was opened from the Help menu.
+					sc.removeControlListener(this);
 					fitHorizontal();
+					sc.addControlListener(this);
 				} catch (Exception ex) {}
 			}
 
