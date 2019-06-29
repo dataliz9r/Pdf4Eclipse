@@ -113,6 +113,7 @@
    </extension>
    <extension
          point="org.eclipse.ui.menus">
+         <!-- Lets get rid of the editor popup menu which doesn't make sense for the TLA+ Toolbox.
       <menuContribution
             allPopups="false"
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
@@ -130,6 +131,7 @@
             </visibleWhen>
          </command>
       </menuContribution>
+      -->
       <menuContribution
             allPopups="false"
             locationURI="toolbar:org.eclipse.ui.main.toolbar">
