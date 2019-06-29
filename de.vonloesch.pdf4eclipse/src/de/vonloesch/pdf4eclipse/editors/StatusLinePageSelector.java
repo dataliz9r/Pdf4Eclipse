@@ -336,9 +336,17 @@ public class StatusLinePageSelector extends ContributionItem {
 	@Override
 	public void dispose() {
 		super.dispose();
-		imageFirst.dispose();
-		imageLast.dispose();
-		imageNext.dispose();
-		imagePrev.dispose();
+		if (imageFirst != null) {
+			imageFirst.dispose();
+		}
+		if (imageLast != null) {
+			imageLast.dispose();
+		}
+		if (imageNext != null) {
+			imageNext.dispose();
+		}
+		if (imagePrev != null) {
+			imagePrev.dispose();
+		}
 	}
 }
